@@ -1,0 +1,97 @@
+body{
+    margin:0 auto;
+    padding:0;
+    box-sizing: border-box;
+    font-family: Ariel, "Helvetica Neve", Helvetica, sans-serif;
+    max-width: 500px;
+    font-size: 1.2em;
+}
+a1{
+    margin: 1rem 0;
+    font-size: 1.5em;
+    display: block;
+    text-align: center;
+}
+body .container{
+    border: 1px solid lightgrey;
+    box-sizing: border-box;
+}
+
+/***nav***/
+nav ul{
+    list-style: none;
+    margin:0;
+    padding:0;
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+   
+}
+nav ul li {
+    border-right: 1px solid #bbb;
+    width: 100%;
+}
+
+nav ul li:last-child {
+    border-right: none;
+}
+nav ul li a{
+    display: block;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding:14px 0;
+}
+nav ul li a:hover {
+    background-color: #111;
+}
+.select {
+    background-color: #324fba;
+}
+
+/*select area*/
+main .mainSelect{
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;   
+}
+.mainSelect select {
+    padding: 0 1.5rem;
+    font-size: .9em;
+}
+.mainSelect span{
+    font-weight: bold;
+}
+
+/*result section*/
+main .resultSelect{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+}
+.resultSelect form input,
+.resultSelect div{
+    font-size: 1.1em; 
+    text-align: center;
+    width: 150px; 
+    padding: 8px 0;
+    border: 1px solid lightgrey;
+}
+.resultSelect span{
+    padding: 5px 15px 0 15px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/***media query***/
+@media (max-width:350px){
+    body{
+        font-size: 1em;
+    }
+    .resultSelect form input,
+    .resultSelect div,
+    .resultSelect span{
+      font-size: 1em;  
+    }
+}
