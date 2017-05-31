@@ -3,7 +3,7 @@ body{
     padding:0;
     box-sizing: border-box;
     font-family: Ariel, "Helvetica Neve", Helvetica, sans-serif;
-    max-width: 500px;
+    max-width: 600px;
     font-size: 1.2em;
 }
 a1{
@@ -35,15 +35,18 @@ nav ul li {
 nav ul li:last-child {
     border-right: none;
 }
-nav ul li a{
+nav ul li button{
     display: block;
-    text-decoration: none;
+    border:none;
     color: white;
     text-align: center;
     width: 100%;
     padding:14px 0;
+    font-size: 1em;
+    background-color: #333;
+    cursor: pointer;
 }
-nav ul li a:hover {
+nav ul li button:hover{
     background-color: #111;
 }
 .select {
@@ -54,10 +57,10 @@ nav ul li a:hover {
 main .mainSelect{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     margin: 2rem 0;   
 }
 .mainSelect select {
-    padding: 0 1.5rem;
     font-size: .9em;
 }
 .mainSelect span{
@@ -71,12 +74,14 @@ main .resultSelect{
     padding-bottom: 2rem;
 }
 .resultSelect form input,
-.resultSelect div{
+.resultSelect input.answer{
     font-size: 1.1em; 
     text-align: center;
-    width: 150px; 
+    max-width: 150px; 
     padding: 8px 0;
     border: 1px solid lightgrey;
+    background-color: white;
+    box-sizing: border-box;
 }
 .resultSelect span{
     padding: 5px 15px 0 15px;
@@ -85,13 +90,24 @@ main .resultSelect{
 }
 
 /***media query***/
-@media (max-width:350px){
-    body{
-        font-size: 1em;
-    }
+@media (max-width:373px){
+    body,
     .resultSelect form input,
     .resultSelect div,
     .resultSelect span{
-      font-size: 1em;  
+      font-size: 1em;
+    }
+    .resultSelect span{
+      padding: 5px 5px 0 5px;
+      font-size: 1em;
+    }
+    .resultSelect form input,
+    .resultSelect input.answer{
+      max-width: 130px;  
+    }
+}
+@media (max-width:541px){
+    div #toAmount{
+        margin-top: 1em;
     }
 }
