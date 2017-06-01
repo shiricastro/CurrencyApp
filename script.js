@@ -13,11 +13,13 @@
   
    var fromSelect = $('select#fromSelect'); 
     fromSelect.change(function(e){
-      formVal = fromSelect.val();     
+      formVal = fromSelect.val();
+      getData(formVal,toVal);
     });
    var toSelect = $('select#toSelect');
     toSelect.change(function(e){
-      toVal = toSelect.val();     
+      toVal = toSelect.val(); 
+      getData(formVal,toVal);
     });
    
   
@@ -28,11 +30,11 @@
       getData(formVal,toVal);
    });
 
-
+   /***use AJAX currency Converter API***/
 function getData(formVal,toVal){
   var data = {symbols: formVal +","+ toVal }; 
   $.getJSON('http://api.fixer.io/latest',data, function(response){
-      var respons = response.rates;
+      var respons = response.rates;     
       convertVal(respons[formVal],respons[toVal]);
       console.log(formVal +","+ toVal);
       console.log(response.rates);
@@ -44,7 +46,13 @@ function getData(formVal,toVal){
 /**print answer**/
   function convertVal(rate1, rate2){
       var value =$('input.answer');
-      var answer = (parseInt(inputValue.val()) * rate1 / rate2).toPrecision(3);
+      if (formVal === 'EUR'){
+        var answer = (parseInt(inputValue.val()) / rate2).toPrecision(3);   
+      }else if (toVal === 'EUR'){
+        var answer = (parseInt(inputValue.val()) * rate1).toPrecision(3);  
+      }else{
+        var answer = (parseInt(inputValue.val()) * rate1 / rate2).toPrecision(3);
+      }     
       value.val(answer);
 };
 
