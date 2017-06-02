@@ -12,16 +12,16 @@
         <div class="container">
             <nav>
                 <ul>
-                    <li><button class="select">$</button></li>
-                    <li><button>Weight</button></li>
-                    <li><button>Height</button></li>
+                    <li><button id="defult" class="select" data-src="currency">$</button></li>
+                    <li><button data-src="weight">Weight</button></li>
+                    <li><button data-src="height">Height</button></li>
                 </ul>
             </nav>
             <main>
-                <div class="mainSelect">
+                <div class="mainSelect" id="currency">
                     <label for="fromSelect">
                         <span>From:</span>
-                        <select id="fromSelect">
+                        <select id="fromSelect" >
                             <option value="AUD">Australian Dollar(AUD)</option>
                             <option value="BGN">Belize Dollar(BZD)</option>
                             <option value="BRL">Brazilian Real(BRL)</option>
@@ -37,9 +37,9 @@
                             <option value="USD" selected>US Dollar(USD)</option>
                         </select> 
                     </label>
-                    <label for="toSelect" id="toAmount">
+                    <label for="toSelect" class="toAmount">
                         <span>To:</span>
-                        <select id="toSelect">
+                        <select id="toSelect" >
                             <option value="AUD" >Australian Dollar(AUD)</option>
                             <option value="BGN">Belize Dollar(BZD)</option>
                             <option value="BRL">Brazilian Real(BRL)</option>
@@ -56,6 +56,70 @@
                         </select>                        
                     </label>
                 </div>
+                <div class="mainSelect" id="weight">
+                    <label for="fromSelect">
+                        <span>From:</span>
+                        <select id="fromSelect" >
+                            <option value="tonne">Tonne</option>
+                            <option value="kilogram" selected>Kilogram</option>
+                            <option value="gram">Gram</option>
+                            <option value="milligram">Milligram</option>                            
+                            <option value="imperial ton">Imperial ton</option>
+                            <option value="US ton">US ton</option>
+                            <option value="stone">Stone</option>
+                            <option value="pound">Pound</option>
+                            <option value="ounce">Ounce</option>
+                        </select> 
+                    </label>
+                    <label for="toSelect" >
+                        <span>To:</span>
+                        <select id="toSelect" >
+                            <option value="tonne">Tonne</option>
+                            <option value="kilogram">Kilogram</option>
+                            <option value="gram" selected>Gram</option>
+                            <option value="milligram">Milligram</option>                            
+                            <option value="imperial ton">Imperial ton</option>
+                            <option value="US ton">US ton</option>
+                            <option value="stone">Stone</option>
+                            <option value="pound">Pound</option>
+                            <option value="ounce">Ounce</option>
+                        </select>                        
+                    </label>
+                </div>
+                <div class="mainSelect" id="height">
+                    <label for="fromSelect">
+                        <span>From:</span>
+                        <select id="fromSelect" >
+                            <option value="kilometre">Kilometre</option>
+                            <option value="metre" selected>Metre</option>
+                            <option value="centimetre">Centimetre</option>
+                            <option value="milimetre">Milimetre</option>                            
+                            <option value="micrometre">Micrometre</option>
+                            <option value="nanometre">Nanometre</option>
+                            <option value="mile">Mile</option>
+                            <option value="yard">Yard</option>
+                            <option value="foot">Foot</option>
+                            <option value="inch">Inch</option>
+                            <option value="nautical mile">Nautical mile</option>
+                        </select> 
+                    </label>
+                    <label for="toSelect" >
+                        <span>To:</span>
+                        <select id="toSelect" >
+                            <option value="kilometre">Kilometre</option>
+                            <option value="metre">Metre</option>
+                            <option value="centimetre" selected>Centimetre</option>
+                            <option value="milimetre">Milimetre</option>                            
+                            <option value="micrometre">Micrometre</option>
+                            <option value="nanometre">Nanometre</option>
+                            <option value="mile">Mile</option>
+                            <option value="yard">Yard</option>
+                            <option value="foot">Foot</option>
+                            <option value="inch">Inch</option>
+                            <option value="nautical mile">Nautical mile</option>
+                        </select>                        
+                    </label>
+                </div>                
                 <div class="resultSelect">
                     <form>
                         <input class="CurrencyVal" type="text" placeholder="value"/>                    

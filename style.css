@@ -107,7 +107,7 @@ main .resultSelect{
     }
 }
 @media (max-width:541px){
-    div #toAmount{
+    div .toAmount{
         margin-top: 1em;
     }
 }

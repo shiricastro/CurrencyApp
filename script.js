@@ -1,11 +1,32 @@
    /***nav***/
+   var mainSelect;  
    var navLink = $('nav ul li button');
-    navLink.click(function(e){
-        e.preventDefault();
+
+  navLink.click(function(e){
+        e.preventDefault();        
+        console.log(e);
+        closeTab(e);
+        changeClass(e);
+        openTab(e);
+        cleanInput();
+    });
+      
+   function changeClass(e){
         navLink.removeClass('select');
         $(e.target).addClass('select');
-    });
-    
+   };
+   function closeTab(e){
+        mainSelect = $('.mainSelect');
+        mainSelect.each(function (i,el){
+          $(el).hide();  
+        });       
+   };
+   function openTab(e){
+        var tab =$(e.target).attr('data-src');
+        $('#'+ tab +'').show();
+        console.log(tab);      
+   };
+   
   /***form***/
   var formVal= $('select#fromSelect').val();
   var toVal= $('select#toSelect').val();
@@ -29,11 +50,15 @@
       e.preventDefault();
       getData(formVal,toVal);
    });
+   
+   function cleanInput(){
+     $('input').val("");   
+   };
 
    /***use AJAX currency Converter API***/
 function getData(formVal,toVal){
   var data = {symbols: formVal +","+ toVal }; 
-  $.getJSON('http://api.fixer.io/latest',data, function(response){
+  $.getJSON('//api.fixer.io/latest',data, function(response){
       var respons = response.rates;     
       convertVal(respons[formVal],respons[toVal]);
       console.log(formVal +","+ toVal);
@@ -56,6 +81,5 @@ function getData(formVal,toVal){
       value.val(answer);
 };
 
-
-
+   $("button#defult").click();
 
