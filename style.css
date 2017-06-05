@@ -6,10 +6,8 @@ body{
     max-width: 600px;
     font-size: 1.2em;
 }
-a1{
-    margin: 1rem 0;
+h1{
     font-size: 1.5em;
-    display: block;
     text-align: center;
 }
 body .container{
@@ -17,8 +15,8 @@ body .container{
     box-sizing: border-box;
 }
 
-/***nav***/
-nav ul{
+/***Togglable Tabs***/
+div ul{
     list-style: none;
     margin:0;
     padding:0;
@@ -27,16 +25,15 @@ nav ul{
     background-color: #333;
    
 }
-nav ul li {
+div ul li {
     border-right: 1px solid #bbb;
     width: 100%;
 }
 
-nav ul li:last-child {
+div ul li:last-child {
     border-right: none;
 }
-nav ul li button{
-    display: block;
+div ul li button{
     border:none;
     color: white;
     text-align: center;
@@ -46,9 +43,7 @@ nav ul li button{
     background-color: #333;
     cursor: pointer;
 }
-nav ul li button:hover{
-    background-color: #111;
-}
+
 .select {
     background-color: #324fba;
 }
@@ -88,7 +83,9 @@ main .resultSelect{
     font-size: 1.5em;
     font-weight: bold;
 }
-
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
 /***media query***/
 @media (max-width:373px){
     body,
@@ -105,9 +102,18 @@ main .resultSelect{
     .resultSelect input.answer{
       max-width: 130px;  
     }
+    div .resultSelect, body{
+        min-width:292px;
+    }
+    
 }
 @media (max-width:541px){
     div .toAmount{
         margin-top: 1em;
+    }
+}
+@media (min-width:1025px){
+    div ul li button:hover{
+        background-color: #111;
     }
 }

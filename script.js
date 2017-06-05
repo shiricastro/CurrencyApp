@@ -1,85 +1,121 @@
-   /***nav***/
+   var ratesVal = {
+	weight: {
+		basis: "kilogram", 
+		rates: {
+                        kilogram: 1,
+			tonne: 0.001,
+			gram: 1000,
+			milligram: 1000000, 
+			imperialTon: 0.000984207,
+                        USTon: 0.00110231,
+                        stone: 0.157473,
+                        pound: 2.20462,
+                        ounce: 35.274
+		}
+	}, 
+	height: {
+		basis: "metre", 
+		rates: {
+                        metre:1,
+                        kilometre:0.001,
+			centimetre: 100,
+			milimetre: 1000,
+                        micrometre: 1000000,
+                        nanometre: 1000000000,
+                        mile: 0.000621371,
+                        yard: 1.09361,
+                        foot: 3.28084,
+                        inch: 39.3701,
+                        nauticalMile: 0.000539957
+		}
+	} 
+};
+   
+  
+   /***Togglable Tabs***/  
    var mainSelect;  
-   var navLink = $('nav ul li button');
+   var togglableTabs = $('div ul li button');
 
-  navLink.click(function(e){
-        e.preventDefault();        
-        console.log(e);
-        closeTab(e);
+  togglableTabs.click(function(e){
+        e.preventDefault(); 
+        manageView($(e.target).attr('data-view'));
         changeClass(e);
-        openTab(e);
-        cleanInput();
+        cleanInput();       
     });
-      
+    
+    
+   function manageView(view){
+       if(view==='currency'){
+          $.get('currencyView.html', function(data){
+             $('main div.mainDiv').html(data); 
+          });           
+       } else if(view==='weight'){
+           $.get('weightView.html', function(data){
+             $('main div.mainDiv').html(data); 
+          });           
+       }else{
+            $.get('heightView.html', function(data){
+             $('main div.mainDiv').html(data); 
+          });          
+       }
+   };
+   
    function changeClass(e){
-        navLink.removeClass('select');
+        togglableTabs.removeClass('select');
         $(e.target).addClass('select');
+        
    };
-   function closeTab(e){
-        mainSelect = $('.mainSelect');
-        mainSelect.each(function (i,el){
-          $(el).hide();  
-        });       
-   };
-   function openTab(e){
-        var tab =$(e.target).attr('data-src');
-        $('#'+ tab +'').show();
-        console.log(tab);      
-   };
-   
-  /***form***/
-  var formVal= $('select#fromSelect').val();
-  var toVal= $('select#toSelect').val();
-  
-  
-   var fromSelect = $('select#fromSelect'); 
-    fromSelect.change(function(e){
-      formVal = fromSelect.val();
-      getData(formVal,toVal);
-    });
-   var toSelect = $('select#toSelect');
-    toSelect.change(function(e){
-      toVal = toSelect.val(); 
-      getData(formVal,toVal);
-    });
-   
+
   
    /***input change***/
-   var inputValue = $('form input.CurrencyVal');   
-   inputValue.change(function(e){
-      e.preventDefault();
-      getData(formVal,toVal);
+   $('form input.CurrencyVal').on('input',function(e){
+      var formVal= $('select#fromSelect').val();
+      var toVal= $('select#toSelect').val();
+      var currentView = $('li button.select').attr('data-view'); 
+      getData(e.target.value ,formVal,toVal,currentView);
+
    });
    
    function cleanInput(){
      $('input').val("");   
    };
 
+    
    /***use AJAX currency Converter API***/
-function getData(formVal,toVal){
-  var data = {symbols: formVal +","+ toVal }; 
-  $.getJSON('//api.fixer.io/latest',data, function(response){
-      var respons = response.rates;     
-      convertVal(respons[formVal],respons[toVal]);
-      console.log(formVal +","+ toVal);
-      console.log(response.rates);
-      console.log(respons[formVal] +","+ respons[toVal]);
-  });  
+function getData(InputValue ,formVal,toVal,currentView){
+  if (formVal === toVal ){
+      var value =$('input.answer');
+      value.val(InputValue);
+  }else if (currentView === 'currency'){
+      var data = {base:formVal,symbols:toVal }; 
+      $.getJSON('//api.fixer.io/latest',data, function(response){
+          var respons = response.rates[toVal];     
+          var answer = (parseInt(InputValue) * respons); //.toFixed(2)
+          convertVal(answer);
+      });
+  }else {
+      convertVal(calcValue(InputValue ,formVal,toVal,currentView));
+  }
+  $('select#fromSelect').change(selectChange);
+  $('select#toSelect').change(selectChange);
 };
 
+function calcValue(InputValue ,formVal,toVal,currentView){
+  return (InputValue * ratesVal[currentView].rates[toVal] / ratesVal[currentView].rates[formVal]);  
+};
 
 /**print answer**/
-  function convertVal(rate1, rate2){
-      var value =$('input.answer');
-      if (formVal === 'EUR'){
-        var answer = (parseInt(inputValue.val()) / rate2).toPrecision(3);   
-      }else if (toVal === 'EUR'){
-        var answer = (parseInt(inputValue.val()) * rate1).toPrecision(3);  
-      }else{
-        var answer = (parseInt(inputValue.val()) * rate1 / rate2).toPrecision(3);
-      }     
-      value.val(answer);
+function convertVal(answer){
+  var value =$('input.answer');
+  value.val(answer);
 };
 
-   $("button#defult").click();
-
+$("button#defult").click();
+    
+function selectChange(){
+  var val = $('.CurrencyVal').val();  
+  var formVal= $('select#fromSelect').val();
+  var toVal= $('select#toSelect').val();
+  var currentView = $('li button.select').attr('data-view');
+  getData(val, formVal,toVal,currentView);
+}
